@@ -4,11 +4,11 @@ const Schema = mongoose.Schema
 // 把想要的資料結構當成參數傳給 new Schema()
 const todoSchema = new Schema ({
     name: {
-        type: string,
+        type: String,
         required: true,
     },
     done: {
-        type:bolean,
+        type: Boolean,
     },
 })
 // mongoose.model 會複製我們定義的 Schema 並編譯成一個可供操作的 model 物件
