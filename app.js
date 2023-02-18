@@ -2,12 +2,15 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 // 載入 Todo model
 const Todo = require('./models/todo')
 
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
+// 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // 加入這段 code, 僅在非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production') {
@@ -37,6 +40,20 @@ Todo.find()
 // 錯誤處理
     .catch(error => console.error(error))
 }) 
+
+app.get('/todos/new', (req,res) => {
+  res.render('new')
+})
+
+app.post('/todos', (req,res) => {
+// 從 req.body 拿出表單裡的 name 資料
+  const name = req.body.name
+// 存入資料庫
+  return Todo.create({ name })
+// 新增完成後導回首頁  
+    .then(() => res.redirect('/')) 
+    .catch(error => console.log(error))
+})
 
 app.listen(port, () => {
     console.log(`I'm listening on localhost:${port}`)
