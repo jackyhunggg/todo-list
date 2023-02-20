@@ -55,6 +55,16 @@ app.post('/todos', (req,res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/todos/:id', (req, res) => {
+  const id = req.params.id
+  // 以 id 去尋找特定一筆 todo 資料
+  return Todo.findById(id)
+  // 用 lean() 把資料整理乾淨
+    .lean()
+    .then((todo) => res.render('detail', { todo }))
+    .catch(error => console.log(error))
+})
+
 app.listen(port, () => {
     console.log(`I'm listening on localhost:${port}`)
 })
