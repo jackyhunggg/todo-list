@@ -1,6 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
+const port = 3000
+// 取得資料庫連線狀態
+const db = mongoose.connection
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 // 載入 Todo model
@@ -18,9 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-const port = 3002
-// 取得資料庫連線狀態
-const db = mongoose.connection
+
 // 連線異常
 db.on('error', () => {
   console.log('mongodb error!')
@@ -82,6 +83,14 @@ app.post('/todos/:id/edit', (req, res) => {
       return todo.save()
     })
     .then(()=> res.redirect(`/todos/${id}`))
+    .catch(error => console.log(error))
+})
+
+app.post('/todos/:id/delete', (req,res) => {
+  const id = req.params.id
+  return Todo.findById(id)
+    .then(todo => todo.remove())
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
