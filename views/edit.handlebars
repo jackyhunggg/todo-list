@@ -1,7 +1,5 @@
-<form action="/todos/{{todos._id}}/edit" method="POST">
-    <input type="text" placeholder="name" 
-    {{!-- value直接帶入了原本資料 --}}
-    name="name" value="{{todo.name}}">
-    <button type="submit">Save</button>
-    <a href="/">Back</a>
+<form action="/todos/{{ todo._id }}/edit" method="POST">
+  <input type="text" placeholder="name" name="name" value="{{ todo.name }}">
+  <button type="submit">Save</button>
+  <a href="/">back</a>
 </form>

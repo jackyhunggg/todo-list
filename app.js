@@ -18,7 +18,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-const port = 3000
+const port = 3002
 // 取得資料庫連線狀態
 const db = mongoose.connection
 // 連線異常
@@ -76,16 +76,13 @@ app.get('/todos/:id/edit', (req, res) => {
 app.post('/todos/:id/edit', (req, res) => {
   const id = req.params.id
   const name = req.body.name
-  // 因為需要等待資料庫返回執行結果，才能進行下一個動作，所以這裡有兩段的 .then()
-  // 查詢資料，如果查詢成功，修改後重新儲存資料
   return Todo.findById(id)
     .then(todo => {
       todo.name = name
       return todo.save()
-  })
-  // 如果儲存成功，重新導向首頁
-  .then(()=> res.redirect(`/todos/${id}`))
-  .catch(error => console.log(error))
+    })
+    .then(()=> res.redirect(`/todos/${id}`))
+    .catch(error => console.log(error))
 })
 
 app.listen(port, () => {
