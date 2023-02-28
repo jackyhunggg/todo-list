@@ -38,6 +38,7 @@ Todo.find()
 // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
     .lean()
 // 根據 _id 升冪排序
+// 如果要降冪 (descending) 排序，可以寫 'desc'
     .sort({ _id: 'asc' })
 // 將資料傳給 index 樣板
     .then(todos => res.render('index',{todos}))
