@@ -7,8 +7,10 @@ const todoSchema = new Schema ({
         type: String,
         required: true,
     },
-    done: {
+    isDone: {
         type: Boolean,
+    // 預設初始狀態為還沒被完成
+        default: false,
     },
 })
 // mongoose.model 會複製我們定義的 Schema 並編譯成一個可供操作的 model 物件
