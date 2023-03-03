@@ -5,7 +5,9 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express')
 const exphbs = require('express-handlebars')
 const app = express()
-const port = 3000
+// 如果在 Heroku 環境則使用 process.env.PORT
+// 否則為本地環境，使用 3000 
+const PORT = process.env.PORT || 3000
 const bodyParser = require('body-parser')
 // 載入 Todo model
 const Todo = require('./models/todo')
@@ -29,6 +31,6 @@ app.use(methodOverride('_method'))
 app.use(routes)
 
 
-app.listen(port, () => {
-    console.log(`I'm listening on localhost:${port}`)
+app.listen(PORT, () => {
+    console.log(`I'm listening on localhost:${PORT}`)
 })
