@@ -4,19 +4,23 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const express = require('express')
 const exphbs = require('express-handlebars')
-const app = express()
-// 如果在 Heroku 環境則使用 process.env.PORT
-// 否則為本地環境，使用 3000 
-const PORT = process.env.PORT || 3000
+
+
 const bodyParser = require('body-parser')
 // 載入 Todo model
 const Todo = require('./models/todo')
 // 載入 method-override
 const methodOverride = require('method-override')
+
 // 引用路由器
 const routes = require('./routes')
 // 對 app.js 而言，Mongoose 連線設定只需要「被執行」，不需要接到任何回傳參數繼續利用，所以這裡不需要再設定變數
 require('./config/mongoose')
+
+const app = express()
+// 如果在 Heroku 環境則使用 process.env.PORT
+// 否則為本地環境，使用 3000 
+const PORT = process.env.PORT || 3000
 
 app.engine('handlebars', exphbs.engine({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
