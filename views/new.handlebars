@@ -1,4 +1,11 @@
-<form action="/todos" method="POST">
+{{!-- <form action="/todos" method="POST">
     <input type="text" placeholder="create" name="name">
     <button class="submit">Create</button>
-</form>
+</form> --}}
+
+<form action="/todos" method="POST" style="display: inline;">
+    <div class="input-group">
+        <input class="form-control" type="text" placeholder="create" name="name">
+        <button class="btn btn-secondary" type="submit">Create</button>
+    </div>
+ </form>
