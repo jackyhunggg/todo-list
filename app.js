@@ -13,9 +13,6 @@ const bodyParser = require('body-parser')
 const Todo = require('./models/todo')
 // 載入 method-override
 const methodOverride = require('method-override')
-const dotenv = require("dotenv")
-
-
 // 引用路由器
 const routes = require('./routes')
 // 對 app.js 而言，Mongoose 連線設定只需要「被執行」，不需要接到任何回傳參數繼續利用，所以這裡不需要再設定變數
