@@ -13,7 +13,7 @@ const bodyParser = require('body-parser')
 const Todo = require('./models/todo')
 // 載入 method-override
 const methodOverride = require('method-override')
-
+const dotenv = require("dotenv")
 
 
 // 引用路由器
